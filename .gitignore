@@ -7,3 +7,4 @@ dist/amp-filter.css
 dist/amp-filter.js
 src/compiled-css/
 src/compiled-js/
+.npmrc
