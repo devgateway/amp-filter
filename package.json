@@ -4,7 +4,7 @@
     "type": "git",
     "url": "https://github.com/devgateway/amp-filter.git"
   },
-  "version": "0.1.2",
+  "version": "0.2.0",
   "description": "Filters to be used across many AMP modules (gis, etc)",
   "main": "dist/amp-filter.js",
   "scripts": {
