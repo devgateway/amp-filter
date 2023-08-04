@@ -1,6 +1,10 @@
 {
   "name": "@devgateway/amp-filter",
-  "version": "0.1.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/devgateway/amp-filter.git"
+  },
+  "version": "0.1.2",
   "description": "Filters to be used across many AMP modules (gis, etc)",
   "main": "dist/amp-filter.js",
   "scripts": {
@@ -36,6 +40,15 @@
     "rimraf": "2.2.8",
     "gulp-load-plugins": "0.10.0"
   },
+  "npmName": "react-infinite-carousel",
+  "npmFileMap": [
+    {
+      "basePath": "/dist/",
+      "files": [
+        "*.js"
+      ]
+    }
+  ],
   "publishConfig": {
     "publishConfig": {
       "@devgateway:registry": "https://npm.pkg.github.com"
