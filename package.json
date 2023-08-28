@@ -1,10 +1,10 @@
 {
-  "name": "@devgateway/amp-filter",
+  "name": "@tmugo/amp-filter",
   "repository": {
     "type": "git",
     "url": "https://github.com/devgateway/amp-filter.git"
   },
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Filters to be used across many AMP modules (gis, etc)",
   "main": "dist/amp-filter.js",
   "scripts": {
@@ -50,13 +50,7 @@
       ]
     }
   ],
-  "publishConfig": {
-    "publishConfig": {
-      "@devgateway:registry": "https://npm.pkg.github.com"
-    },
-    "tag": "latest"
-  },
   "dependencies": {
-    "amp-translate": "github:devgateway/amp-translate"
+    "amp-translate": "^0.0.1"
   }
 }
