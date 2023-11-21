@@ -70,7 +70,7 @@ module.exports = Backbone.View.extend({
         this._getFilterList().then(function () {
             self.allFilters.each(function (model) {
                 if (model.get('empty')) {
-                    for (key in filterInstancesNames) {
+                    for (var key in filterInstancesNames) {
                         if (filterInstancesNames.hasOwnProperty(key)) {
                             if (filterInstancesNames[key] == model.get('group')) {
                                 // remove tab if there is no data for the tab
@@ -91,7 +91,7 @@ module.exports = Backbone.View.extend({
     },
 
     _createTopLevelFilterViews: function () {
-        for (key in filterInstancesNames) {
+        for (var key in filterInstancesNames) {
             if (filterInstancesNames.hasOwnProperty(key)) {
                 this.filterViewsInstances[key] = new TopLevelFilterView({
                     name: filterInstancesNames[key],
