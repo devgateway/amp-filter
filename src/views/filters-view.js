@@ -11,7 +11,6 @@ var AllFilterCollection = require('../collections/all-filters-collection');
 var Template = fs.readFileSync(__dirname + '/../templates/filters-content-template.html', 'utf8');
 var TitleTemplate = fs.readFileSync(__dirname + '/../templates/filter-title-template.html', 'utf8');
 var AppliedFiltersTemplate = fs.readFileSync(__dirname + '/../templates/applied-filters-view.html', 'utf8');
-var filtersViewLog = require("../../../../../reamp/tools/log")('amp:filters:top-level:view');
 var GeneralSettings = require('../models/general-settings');
 var DateUtils = require('../utils/date-utils');
 var Constants = require('../utils/constants');
@@ -130,7 +129,7 @@ module.exports = Backbone.View.extend({
 
                 var activeTab = $(e.target.parentElement).index(); // shameful hack, but haven't been able to find a cleaner solution
                 var oldTabNr = e.relatedTarget ? $(e.relatedTarget.parentElement).index() : -1;
-                filtersViewLog.log('switching from filters tab', oldTabNr, 'to tab', activeTab);
+                console.log('switching from filters tab', oldTabNr, 'to tab', activeTab);
                 $(e.target).closest('ul.filter-titles').attr('active-tab-number', activeTab); // not used in the current implementation of the code
 
                 // render the first item of the tab
@@ -155,9 +154,7 @@ module.exports = Backbone.View.extend({
         self.popovers = self.$('[data-toggle="popover"]');
         self.popovers.popover();
         if (force === true || self.translator === undefined) {
-            filtersViewLog.onDebug(function () {
-                filtersViewLog.log('Creating translator for filters because', force === true ? 'I was forced' : 'there is no translator');
-            });
+            console.log('Creating translator for filters because', force === true ? 'I was forced' : 'there is no translator');
             self.translator = new Translator({defaultKeys: filterTranslateKeys});
         }
     },
