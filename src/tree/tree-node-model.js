@@ -166,7 +166,6 @@ TreeNodeModel = Backbone.Model.extend({
             return false;
         }
     },
-
     _isLocationAndDontIncludeChildren: function () {
         // By default is undefined because we need to get the deserealized data to know if it will be true|false.
         var result = undefined;
