@@ -193,21 +193,24 @@ TreeNodeModel = Backbone.Model.extend({
     },
 
     _getRootNode: function () {
+        var isRoot = (this.get('id') === -1 && this.get('parent') === undefined);
+        var node = null;
         var currentNode = this;
-        while (currentNode) {
-            if (currentNode.get('id') === -1 && currentNode.get('parent') === undefined) {
-                return currentNode;
-            } else {
-                var parent = currentNode.get('parent');
-                if (!parent) {
-                    // Handle case where parent is undefined (e.g., during deserialization)
-                    // You might throw an error, return a default value, or handle it differently
-                    break;
+        while (isRoot === false) {
+            if (currentNode) {
+                if (currentNode.get('id') === -1 && currentNode.get('parent') === undefined) {
+                    node = currentNode;
+                    isRoot = true;
+                } else {
+                    currentNode = currentNode.get('parent');
                 }
-                currentNode = parent;
+            } else {
+                /* When deserealizing saved filters that happens before the tree is created so parent field is undefined
+                at this point. */
+                break;
             }
         }
-        return null; // Return null if root node is not found
+        return node;
     }
     ,
 
