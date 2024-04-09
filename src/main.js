@@ -11,7 +11,7 @@ if (window.$ == undefined || $.fn.jquery.split(' ')[0].split('.')[0] < 2) {
 
 if (typeof Backbone.$ === 'undefined') {
     console.log('relink backbone');
-    Backbone.$ = window.$
+    Backbone.$ = jQuery;
 }
 
 require('jquery-ui/draggable');
