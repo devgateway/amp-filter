@@ -168,29 +168,25 @@ TreeNodeModel = Backbone.Model.extend({
         }
     },
     _isLocationAndDontIncludeChildren: function () {
-        // By default is undefined because we need to get the deserealized data to know if it will be true|false.
-        var result = undefined;
-        if (this._isLocation()) {
-            // Check if the field exists but only for root level.
-            if (this.get('id') === -1 && this.get('parent') === undefined) {
-                if (this.get('include-location-children') !== undefined) {
-                    result = !this.get('include-location-children');
-                }
-            } else {
-                var node = this._getRootNode();
-                if (node !== null && node !== undefined) {
+        if (!this._isLocation()) {
+            return false;
+        }
 
-                    if (node.get('include-location-children') !== undefined) {
-                        result = !node.get('include-location-children');
-                    }
-                }
-
+        if (this.get('id') === -1 && this.get('parent') === undefined) {
+            var includeChildren = this.get('include-location-children');
+            if (includeChildren !== undefined) {
+                return !includeChildren;
             }
         } else {
-            result = false;
+            var node = this._getRootNode();
+            if (node !== null && node.get('include-location-children') !== undefined) {
+                return !node.get('include-location-children');
+            }
         }
-        return result;
-    },
+
+        return undefined; // Default value if conditions are not met
+    }
+    ,
 
     _getRootNode: function () {
         var isRoot = (this.get('id') === -1 && this.get('parent') === undefined);
