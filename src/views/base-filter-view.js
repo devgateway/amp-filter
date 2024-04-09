@@ -5,7 +5,7 @@ var $ = require('jquery');
 var Backbone = require('backbone');
 var TitleTemplate = fs.readFileSync(__dirname + '/../templates/subfilter-title-template.html', 'utf8');
 var ContentTemplate = fs.readFileSync(__dirname + '/../templates/filters-content-template.html', 'utf8');
-
+Backbone.$=$;
 // Parent base view for filters.
 module.exports = Backbone.View.extend({
 

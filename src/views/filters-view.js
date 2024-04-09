@@ -26,7 +26,7 @@ var filterInstancesNames = {
     others: 'Other'
 };
 
-
+Backbone.$=$;
 module.exports = Backbone.View.extend({
     id: 'tool-filters',
     name: 'Filters',
@@ -148,6 +148,7 @@ module.exports = Backbone.View.extend({
     },
 
     createTranslator: function (force) {
+        // this.$=$;
         var self = this;
         var filterTranslateKeys = JSON.parse(fs.readFileSync(__dirname + '/../lib/initial-translation-request.json', 'utf8'));
         // setup any popovers as needed...
