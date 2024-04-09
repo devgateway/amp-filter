@@ -14,7 +14,7 @@ var AppliedFiltersTemplate = fs.readFileSync(__dirname + '/../templates/applied-
 var GeneralSettings = require('../models/general-settings');
 var DateUtils = require('../utils/date-utils');
 var Constants = require('../utils/constants');
-require('bootstrap');
+var bootstrap =require('bootstrap');
 
 var filterInstancesNames = {
     donors: 'Funding Organizations',
@@ -155,8 +155,8 @@ module.exports = Backbone.View.extend({
         // setup any popovers as needed...
         // self.popovers = ;
         // self.$=$;
-        $.noConflict();
-        $(document).ready(function($) {
+        // $.noConflict();
+        $(document).ready(function() {
             $('[data-toggle="popover"]').popover();
         });
 
