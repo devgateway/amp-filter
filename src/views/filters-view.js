@@ -14,7 +14,6 @@ var AppliedFiltersTemplate = fs.readFileSync(__dirname + '/../templates/applied-
 var GeneralSettings = require('../models/general-settings');
 var DateUtils = require('../utils/date-utils');
 var Constants = require('../utils/constants');
-var bootstrap =require('bootstrap');
 
 var filterInstancesNames = {
     donors: 'Funding Organizations',
@@ -27,7 +26,7 @@ var filterInstancesNames = {
     others: 'Other'
 };
 
-Backbone.$=$;
+
 module.exports = Backbone.View.extend({
     id: 'tool-filters',
     name: 'Filters',
@@ -149,17 +148,11 @@ module.exports = Backbone.View.extend({
     },
 
     createTranslator: function (force) {
-        // this.$=$;
         var self = this;
         var filterTranslateKeys = JSON.parse(fs.readFileSync(__dirname + '/../lib/initial-translation-request.json', 'utf8'));
         // setup any popovers as needed...
-        // self.popovers = ;
-        // self.$=$;
-        // $.noConflict();
-        $(document).ready(function() {
-            $('[data-toggle="popover"]').popover();
-        });
-
+        self.popovers = self.$('[data-toggle="popover"]');
+        self.popovers.popover();
         if (force === true || self.translator === undefined) {
             console.log('Creating translator for filters because', force === true ? 'I was forced' : 'there is no translator');
             self.translator = new Translator({defaultKeys: filterTranslateKeys});
