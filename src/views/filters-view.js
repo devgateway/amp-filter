@@ -154,8 +154,10 @@ module.exports = Backbone.View.extend({
         var filterTranslateKeys = JSON.parse(fs.readFileSync(__dirname + '/../lib/initial-translation-request.json', 'utf8'));
         // setup any popovers as needed...
         // self.popovers = ;
-        self.$(document).ready(function() {
-            self.$('[data-toggle="popover"]').popover();
+        // self.$=$;
+        $.noConflict();
+        $(document).ready(function($) {
+            $('[data-toggle="popover"]').popover();
         });
 
         if (force === true || self.translator === undefined) {
