@@ -1,11 +1,12 @@
 var _ = require('underscore');
+var $ = require('jquery');
 var Backbone = require('backbone');
 var TreeNodeModel; // declare here to help with ref loop of collection and model
 var TreeNodeCollection = Backbone.Collection.extend({model: TreeNodeModel});
 var Constants = require('../utils/constants');
 
 var hasAnySelectedChildren = false;
-
+Backbone.$=$;
 TreeNodeModel = Backbone.Model.extend({
     defaults: {
         selected: undefined,  // default is selected. change to string / ternary, for off, semi, and on
@@ -188,25 +189,23 @@ TreeNodeModel = Backbone.Model.extend({
     },
 
     _getRootNode: function () {
-        var isRoot = (this.get('id') === -1 && this.get('parent') === undefined);
-        var node = null;
         var currentNode = this;
-        while (isRoot === false) {
-            if (currentNode) {
-                if (currentNode.get('id') === -1 && currentNode.get('parent') === undefined) {
-                    node = currentNode;
-                    isRoot = true;
-                } else {
-                    currentNode = currentNode.get('parent');
-                }
+        while (currentNode) {
+            if (currentNode.get('id') === -1 && currentNode.get('parent') === undefined) {
+                return currentNode;
             } else {
-                /* When deserealizing saved filters that happens before the tree is created so parent field is undefined
-                at this point. */
-                break;
+                var parent = currentNode.get('parent');
+                if (!parent) {
+                    // Handle case where parent is undefined (e.g., during deserialization)
+                    // You might throw an error, return a default value, or handle it differently
+                    break;
+                }
+                currentNode = parent;
             }
         }
-        return node;
-    },
+        return null; // Return null if root node is not found
+    }
+    ,
 
     _hasAnySelectedChildren: function () {
         hasAnySelectedChildren = false;
