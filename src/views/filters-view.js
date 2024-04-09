@@ -152,7 +152,7 @@ module.exports = Backbone.View.extend({
         var self = this;
         var filterTranslateKeys = JSON.parse(fs.readFileSync(__dirname + '/../lib/initial-translation-request.json', 'utf8'));
         // setup any popovers as needed...
-        self.popovers = self.$('[data-toggle="popover"]');
+        self.popovers = $('[data-toggle="popover"]');
         self.popovers.popover();
         if (force === true || self.translator === undefined) {
             console.log('Creating translator for filters because', force === true ? 'I was forced' : 'there is no translator');
