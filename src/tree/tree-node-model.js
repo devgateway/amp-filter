@@ -178,9 +178,13 @@ TreeNodeModel = Backbone.Model.extend({
                 }
             } else {
                 var node = this._getRootNode();
-                if (node.get('include-location-children') !== undefined) {
-                    result = !node.get('include-location-children');
+                if (node !== null && node !== undefined) {
+
+                    if (node.get('include-location-children') !== undefined) {
+                        result = !node.get('include-location-children');
+                    }
                 }
+
             }
         } else {
             result = false;
