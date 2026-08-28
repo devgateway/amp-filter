@@ -17,7 +17,7 @@
     ]
   },
   "author": "david rs",
-  "license": "none",
+  "license": "GPL-3.0-only",
   "devDependencies": {
     "backbone": "1.1.2",
     "beeper": "1.1.1",
