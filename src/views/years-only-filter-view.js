@@ -1,5 +1,6 @@
 var fs = require('fs');
 var _ = require('underscore');
+var $ = require('jquery');
 var BaseFilterView = require('../views/base-filter-view');
 
 var Template = fs.readFileSync(__dirname + '/../templates/years-only-template.html', 'utf8');

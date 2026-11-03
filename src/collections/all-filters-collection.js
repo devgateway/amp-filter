@@ -157,7 +157,7 @@ module.exports = Backbone.Collection.extend({
     _createTree: function (data, definition) {
         var self = this;
         var tree = [];
-        var dataCopy = jQuery.extend(true, [], data);
+        var dataCopy = $.extend(true, [], data);
         var filterIds;
         if (definition.filterIds) {
             filterIds = definition.filterIds.filter(function (id) {

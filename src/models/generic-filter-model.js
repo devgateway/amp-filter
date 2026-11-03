@@ -1,4 +1,5 @@
 var _ = require('underscore');
+var $ = require('jquery');
 
 var BaseFilterModel = require('../models/base-filter-model');
 var TreeNodeModel = require('../tree/tree-node-model');

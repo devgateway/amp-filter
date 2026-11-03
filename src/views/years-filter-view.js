@@ -1,5 +1,6 @@
 var fs = require('fs');
 var _ = require('underscore');
+var $ = require('jquery');
 var BaseFilterView = require('../views/base-filter-view');
 require('jquery-ui/datepicker');
 
