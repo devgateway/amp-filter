@@ -1,6 +1,10 @@
 If you are including this widget in your code, then this main.js should be the only code you need to read.
 This widget will trigger a 'cancel' and 'apply' events fired when the user does those actions.
 
+The Disaggregation filter is available only for `caller: 'REPORTS'` with
+`reportType: 'I'`. If a non-report page must use the reports caller, pass
+`reportContext: false` to exclude that filter.
+
 ```
 // Sample Init:
 this.app.filtersWidget = new FiltersWidget({

@@ -41,7 +41,8 @@ module.exports = BaseFilterModel.extend({
     getNumSelected: function () {
         var numSelected = this.get('numSelected');
         // if none selected, or all selected, treat the same.
-        if (!numSelected || this.get('numSelected') === this.get('numPossible')) {
+        if (!numSelected || (!this.get('serializeSelectedLeaves')
+            && this.get('numSelected') === this.get('numPossible'))) {
             return 0;
         } else {
             return numSelected;
@@ -54,7 +55,9 @@ module.exports = BaseFilterModel.extend({
             //console.warn('no tree found', this.attributes);
             return {}; //no tree, nothing to serialize.
         } else {
-            var tmpAry = tree.serialize(options);
+            var tmpAry = tree.serialize(_.extend({}, options, {
+                serializeSelectedLeaves: this.get('serializeSelectedLeaves')
+            }));
             return tmpAry;
         }
     },
@@ -146,7 +149,7 @@ module.exports = BaseFilterModel.extend({
         }
 
         var rootNodeObj = null;
-        if (data.length === 1) {
+        if (data.length === 1 && !this.get('serializeSelectedLeaves')) {
             if (data[0].filterId && !data[0].name) {
                 data[0].name = data[0].filterId;
             }
@@ -174,4 +177,3 @@ module.exports = BaseFilterModel.extend({
 
     }
 });
-

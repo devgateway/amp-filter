@@ -252,7 +252,7 @@ module.exports = Backbone.View.extend({
         if (filter.get('tree')) {
             var entryPoint = filter.get('tree').get('children');
             var currentLevel = 0;
-            if (filter.get('numSelected') !== filter.get('numPossible')) {
+            if (filter.get('serializeSelectedLeaves') || filter.get('numSelected') !== filter.get('numPossible')) {
                 _.each(entryPoint.models, function (item) {
                     _self.serializeLevel(item, 0, _self.values);
                 });
@@ -370,7 +370,7 @@ module.exports = Backbone.View.extend({
 
     getAppliedFiltersTree: function (serializedFilters, filter) {
         var self = this;
-        if (self.isNodeSelected(filter)) {
+        if (!filter.get('serializeSelectedLeaves') && self.isNodeSelected(filter)) {
             // AMP-28806: Dont add filter if all selected.
         } else {
             var tree = filter.get('tree');
@@ -449,7 +449,8 @@ module.exports = Backbone.View.extend({
                 } else {
                     var serialized = filter.serialize(options);
                     //AMP-28806: Dont filter if all selected.
-                    if (filter.get('numPossible') === filter.get('numSelected') && filter.get('numSelected') > 0) {
+                    if (!filter.get('serializeSelectedLeaves') &&
+                        filter.get('numPossible') === filter.get('numSelected') && filter.get('numSelected') > 0) {
                         serialized = {};
                     }
                     if (options.wholeModel === true) {

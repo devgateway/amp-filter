@@ -4,6 +4,7 @@ var constants = {
     FILTER_ID_SECTOR: 'sectors',
     FILTER_ID_PROGRAM: 'programs',
     FILTER_ID_LOCATION: 'locations',
+    FILTER_ID_INDICATOR_DISAGGREGATION: 'indicator-disaggregation',
     FILTER_ID_DATE: 'date',
     FILTER_ID_COMPUTED_YEAR: 'computed-year',
     LEVEL_ONE: 1,

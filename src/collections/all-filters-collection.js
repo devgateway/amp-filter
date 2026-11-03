@@ -17,6 +17,8 @@ module.exports = Backbone.Collection.extend({
     componentCaller: null,
     translator: null,
     initialize: function (models, options) {
+        this.isIndicatorReport = options.caller === Constants.CONTEXT_REPORT && options.reportType === 'I'
+            && options.reportContext !== false;
         this.on('add', this._cleanUpAfterAdd);
         this.load(options.reportType);
         this.translator = options.translator;
@@ -29,8 +31,8 @@ module.exports = Backbone.Collection.extend({
         var self = this;
         if (!this._loaded) {
             this._loaded = new $.Deferred();
-            if (reportType === 'P') {
-                this.url = Constants.ALL_FILTERS_URL + '?report-type=P';
+            if (reportType === 'P' || reportType === 'I') {
+                this.url = Constants.ALL_FILTERS_URL + '?report-type=' + reportType;
             }
             this.fetch({remove: false}).then(function () {
                 // when all child calls are done resolve.
@@ -67,9 +69,9 @@ module.exports = Backbone.Collection.extend({
     },
 
     parse: function (data) {
-        //only keep filters with ui == true;
+        var isIndicatorReport = this.isIndicatorReport;
         data = _.filter(data, function (obj) {
-            return obj.ui;
+            return obj.ui && (obj.id !== Constants.FILTER_ID_INDICATOR_DISAGGREGATION || isIndicatorReport);
         });
 
         return data;
@@ -131,6 +133,7 @@ module.exports = Backbone.Collection.extend({
                         name: def.displayName,
                         displayName: def.displayName,
                         originalName: def.name,
+                        serializeSelectedLeaves: def.serializeSelectedLeaves,
                         tab: (def.tab && def.tab !== Constants.UNASSIGNED) ? def.tab : attrs.tab,
                         ui: true,
                         group: self._getGroup(def, attrs),

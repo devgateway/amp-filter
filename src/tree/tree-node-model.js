@@ -63,6 +63,10 @@ TreeNodeModel = Backbone.Model.extend({
         }
         var tmpSerialized = {};
         var children = this.get('children');
+        if (options.serializeSelectedLeaves && !options.includeUnselected && children.length > 0) {
+            this._serializeChildren(tmpSerialized, children, options);
+            return tmpSerialized;
+        }
         // AMP-28683: Before checking if it has children, check if the "parent" is selected.
         // IMPORTANT: we cant trust on "selected" field on branch nodes, except in the special case for locations
         // without including children. The problem is branch nodes only have selected===true when you click on them.
